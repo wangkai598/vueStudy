@@ -1,0 +1,40 @@
+<!-- 指令 -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>指令</title>
+    <script src="vue.js"  type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <p v-if='seen'>现在你看到我了</p>
+        <a :href="url">...</a>
+        <div v-on:click='click1'>
+            <!-- 简写 -->
+            <div @click.stop='click2'>
+                click me
+            </div>
+        </div>
+    </div>
+    <script>
+        var data = {
+            message: 'hello vue',
+            seen:true,
+            url:'http://www.baidu.com'
+        };
+        var app = new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+                click1: function() {
+                    console.log('click1');
+                },
+                click2: function() {
+                    console.log('click2');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

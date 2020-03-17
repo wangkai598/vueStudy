@@ -1,0 +1,63 @@
+<!-- 侦听器 -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>侦听器</title>
+    <script src="vue.js"  type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+</head>
+<body>
+    <div id="watch-example">
+        <p>
+            ask a yes/no question:
+            <input v-model='question'>
+        </p>
+        <p>{{answer}}</p>
+    </div>
+    <script>
+        var data = {
+            question: '',
+            answer : 'I cannot give you an answer until you ask a question'
+        };
+        var app = new Vue({
+            el: '#watch-example',
+            data: data,
+            watch:{
+                //如果 question 发生改变,这个函数就会运行
+                question:function(newQuestion,oldQuestion){
+                    this.answer = 'waiting for you to stop typing'
+                    this.debouncedGetAnswer()
+
+                }
+            },
+            created: function(){
+                this.debouncedGetAnswer = _.debounce(this.getAnswer,500)
+            },
+            methods:{
+                getAnswer:function() {
+                    if(this.question.indexOf('?') === -1) {
+                        this.answer = 'questions usually contain a question mark. ;-'
+                        return
+                    }
+                    this.answer = 'thinking....'
+                    var vm = this
+                    axios.get('https://yesno.wtf/api')
+                    .then(function(response){
+                        vm.answer = _.capitalize(response.data.answer)
+                    })
+                    .catch(function (error){
+                        vm.answer = 'error! could not reach the api'+ error
+                    })
+                }
+            }
+        });
+        // data.name = 'keven'
+       app.$e1 == document.getElementById('app')
+       app.$watch('message',function(newValue,oldValue){
+           console.log(newValue,oldValue);
+       })
+       app.$data.message = "哈哈"
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!-- 计算属性和侦听器 -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>计算属性和侦听器</title>
+    <script src="vue.js"  type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="app">
+      <p>original message: "{{message}}"</p>
+      <!-- 使用计算属性 -->
+      <p>computed reversed message: "{{testComputedAttribute}}"</p>
+       <!-- 使用函数 -->
+      <p>Reversed message:"{{reversedMessage()}}"</p>
+      <!--我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。
+      然而，不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。
+      这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数。-->
+      <p>{{fullName}}</p>
+    </div>
+    <script>
+        var data = {
+            message: 'hello vue',
+            firstName: 'kai',
+            lastName:'Wang'
+        };
+        var app = new Vue({
+            el: '#app',
+            data: data,
+            computed: {
+                //计算属性的getter
+                testComputedAttribute:function (){
+                    //'this'指向vm 实例
+                    return this.message.split('').reverse().join('')
+                },
+                fullName:function(){
+                    return this.lastName+this.firstName
+                }
+            },
+            methods: {
+                    reversedMessage:function(){
+                        return this.message.split('').reverse().join('')
+                    }
+                }
+        });
+    </script>
+</body>
+</html>
