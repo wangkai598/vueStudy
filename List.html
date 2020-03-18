@@ -1,0 +1,40 @@
+<!-- 列表渲染 -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>列表渲染</title>
+    <script src="vue.js"  type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for='item,index in items' :key='index'>
+              {{index}} - {{item.message}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for='value,key in object' :key='key'>
+                {{key}}-{{value}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        var data = {
+            items: [
+                {message:'foo'},
+                {message:'bar'}
+            ],
+            object: {
+                title:'how to do list in vue',
+                author:'keven',
+                publishedAt:'2020-03-18'
+            }
+        };
+        var app = new Vue({
+            el: '#app',
+            data: data
+        });
+       
+    </script>
+</body>
+</html>
