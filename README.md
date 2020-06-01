@@ -1,4 +1,5 @@
 # VueStudy
+##基础
 [创建第一个vue实例](./hello.html)
 
 [声明周期](./index.html)
@@ -18,3 +19,5 @@
 [列表渲染](./List.html)
 
 [事件处理](./event.html)
+
+[表单输入绑定](./form.html)

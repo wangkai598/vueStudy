@@ -50,7 +50,23 @@
         <!-- 这个 .passive 修饰符尤其能够提升移动端的性能。 -->
         <!-- 不要把 .passive 和 .prevent 一起使用，因为 .prevent 将会被忽略，同时浏览器可能会向你展示一个警告。请记住，.passive 会告诉浏览器你不想阻止事件的默认行为。 -->
         <!-- 按键修饰符 -->
-        
+        <!-- 只有在 `key` 是 `Enter` 时调用 `vm.submit()` -->
+        <input v-on:keyup.enter="submit">
+        <!-- 你可以直接将 KeyboardEvent.key 暴露的任意有效按键名转换为 kebab-case 来作为修饰符。 -->
+        <input v-on:keyup.page-down="onPageDown">
+        <!-- 在上述示例中，处理函数只会在 $event.key 等于 PageDown 时被调用。 -->
+        <!-- 系统修饰键 -->
+        <!--  Alt + C -->
+        <input v-on:keyup.alt.67="clear">
+        <!--  Ctrl + Click  -->
+        <div v-on:click.ctrl="doSomething">Do something</div>
+        <!--.exact 修饰符允许你控制由精确的系统修饰符组合触发的事件。  -->
+        <!--  即使 Alt 或 Shift 被一同按下时也会触发 -->
+        <button v-on:click.ctrl="onClick">A</button>
+        <!--  有且只有 Ctrl 被按下的时候才触发 -->
+        <button v-on:click.ctrl.exact="onCtrlClick">A</button>
+        <!--  没有任何系统修饰符被按下的时候才触发-->
+        <button v-on:click.exact="onClick">A</button>
     <script>
    var example1 = new Vue({
         el: '#example-1',

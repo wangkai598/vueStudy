@@ -1,0 +1,30 @@
+<!-- 列表渲染 -->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>表单输入绑定</title>
+  <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<!-- v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
+
+text 和 textarea 元素使用 value 属性和 input 事件；
+checkbox 和 radio 使用 checked 属性和 change 事件；
+select 字段将 value 作为 prop 并将 change 作为事件。 -->
+
+<body>
+  <div id="app">
+    <input v-model="message" placeholder="编辑我……">
+    <p>消息是: {{ message }}</p>
+  </div>
+  <script>
+  new Vue({
+      el: '#app',
+      data: {
+        message: '哈哈'
+      }
+    });
+  </script>
+</body>
+
+</html>
